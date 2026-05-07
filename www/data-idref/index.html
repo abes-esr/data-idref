@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Data IdRef - IdRef en métadonnées</title>
+
+	<link rel="shortcut icon" href="img/icon.png" />
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+	<script src="https://use.fontawesome.com/8f945fc6cf.js"></script>
+	<!-- Piwik -->
+	<script type="text/javascript">
+		var _paq = _paq || [];
+        // tracker methods like "setCustomDimension" should be called before "trackPageView"
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+          var u="//piwik.abes.fr/";
+          _paq.push(['setTrackerUrl', u+'piwik.php']);
+          _paq.push(['setSiteId', '20']);
+          var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+        <!-- End Piwik Code -->
+
+        $(document).ready(function(){
+          $('.sidenav').sidenav();
+        });
+	</script>
+</head>
+<body class="grey lighten-5">
+<div class="navbar-fixed">
+	<nav class="white">
+		<div class="nav-wrapper">
+			<a href="https://data.idref.fr" target="_blank" class="brand-logo"><img src="img/logo-data-idref.png" title="IdRef" alt="IdRef" /></a>
+			<a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				<li class="active"><a href="/index.html" class="black-text">Accueil</a></li>
+				<li><a href="/exploration.html" class="black-text">Exploration</a></li>
+				<li><a href="/yasgui.html" class="black-text">Yasgui</a></li>
+				<li><a href="/sparql" class="black-text">Sparql endpoint</a></li>
+				<li>
+					<a href="http://documentation.abes.fr/aideidrefdata/index.html" target="_blank" >
+						<img src="img/aide.png" title="Documentation" alt="Documentation" />
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<ul class="sidenav white" id="mobile-demo">
+	<li class="active"><a href="/index.html" class="black-text">Accueil</a></li>
+	<li><a href="/exploration.html" class="black-text">Exploration</a></li>
+	<li><a href="/yasgui.html" class="black-text">Yasgui</a></li>
+	<li><a href="/sparql" class="black-text">Sparql endpoint</a></li>
+	<li>
+		<a href="http://documentation.abes.fr/aideidrefrdf/index.html" target="_blank" >
+			<img src="img/aide.png" title="Documentation" alt="Documentation" />
+		</a>
+	</li>
+</ul>
+
+<div class="container">
+
+	<div class="row">
+		<div class="col s12 m9">
+			<br/>
+			<h4>
+				Bienvenue sur <span style="color:#26318f;">data.id</span><span style="color:#da1259;">ref</span><span style="color:#26318f;">.fr</span>, triple store d’IdRef et de ses alignements.
+			</h4>
+			<p>
+			<h5>Les données</h5>
+			Dans le triple store d'IdRef, vous trouverez <b>les notices d’autorité IdRef et les publications et références bibliographiques liées à une autorité IdRef en provenance des catalogues et gisements documentaires</b> suivants :
+			<table>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-sudoc.png" title="Sudoc" style="margin-left:50px; width:30px;"> Sudoc</th>
+					<th><img class="img-size-s" src="img/bibliographie-calames.png" title="Calames" style="margin-left:50px; width:30px;">Calames</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-theses.png" title="theses.fr"  style="margin-left:50px; width:30px;">theses.fr</th>
+					<th><img class="img-size-s" src="img/bibliographie-bnf.png" title="BnF" style="margin-left:50px; width:30px;">BnF</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-scienceplus.png" title="Scienceplus" style="margin-left:50px; width:30px;">Scienceplus (EDP, OUP, etc.)</th>
+					<th><img class="img-size-s" src="img/bibliographie-cairn.png" title="Cairn.info" style="margin-left:50px; width:30px;">Cairn.info</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-openedition.png" title="OpenEdition Journals" style="margin-left:50px; width:30px;">OpenEdition</th>
+					<th><img class="img-size-s" src="img/bibliographie-erudit.png" title="érudit" style="margin-left:50px; width:30px;">érudit</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-hal.png" title="HAL" style="margin-left:50px; width:30px;">HAL</th>
+					<th><img class="img-size-s" src="img/bibliographie-persee.png" title="Persee" style="margin-left:50px; width:30px;">Persée</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-numdam.png" title="Numdam" style="margin-left:50px; width:30px;">Numdam</th>
+					<th><img class="img-size-s" src="img/bibliographie-zbmath.png" title="zbMATH" style="margin-left:50px; width:30px;">zbMATH</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-orbi.png" title="ORBi" style="margin-left:50px; width:30px;">ORBi (Université de Liège)</th>
+					<th><img class="img-size-s" src="img/bibliographie-orbi_mons.png" title="ORBi" style="margin-left:50px; width:30px;">ORBi_Mons (Université de Mons)</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-unige.png" title="AO-Unige" style="margin-left:50px; width:30px;">Archive ouverte Unige (Université de Genève)</th>
+					<th><img class="img-size-s" src="img/bibliographie-libra.png" title="Libra" style="margin-left:50px; width:30px;">Libra (Université de Neuchâtel)</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-folia.png" title="Folia" style="margin-left:50px; width:30px;">Folia (Université de Fribourg)</th>
+					<th><img class="img-size-s" src="img/bibliographie-unil.png" title="Serval" style="margin-left:50px; width:30px;">IRIS (Université de Lausanne)</th>
+				</tr>
+				<tr>
+					<th><img class="img-size-s" src="img/bibliographie-canalu.png" title="CanalU" style="margin-left:50px; width:30px;">CanalU</th>
+					<th><img class="img-size-s" src="img/bibliographie-ird.png" title="IRD" style="margin-left:50px; width:30px;">Horizon IRD</th>
+				</tr>
+			</table>
+			<p>
+			L'ensemble des données d'autorité d'IdRef sont converties sous la forme de triplets RDF.<p/>
+			<b>Tous les types d'autorité</b> sont présents : Personnes, Collectivités, Noms Communs (Rameau et FMeSH), Noms géographiques, Familles et Titres et même les Notices de regroupement (préfiguration du modèle WOEMI).			<br/>
+			<p>
+			Toutes les <b>publications et références documentaires</b> sont présentes sous la forme d’une URI, d’un rôle, d'une date de publication et d’une citation bibliographique ou d'un titre (voir selon les corpus) et des liens aux autorités sous la forme de concepts, de contribution, etc.			<p/>
+			<p>
+				NB : Le Sudoc constitue un cas particulier car la modélisation de ses ressources documentaires est plus riche que pour les autres gisements. De plus, le Sudoc est le vecteur des alignements des ressources theses.fr et BnF avec IdRef.	<br/>
+			</p>
+			<p>
+			<h5>Le temps réel et les mises à jour</h5>
+			La conception de <span style="color:#26318f;">data.id</span><span style="color:#da1259;">ref</span><span style="color:#26318f;">.fr</span> repose sur un parti pris pour <b>le temps réel</b>.			<p/>
+			Chaque modification apportée aux notices d’autorité et chaque création d'autorité via les interfaces de production (WinIBW ou IdRef) est répercutée sans délai.
+			Afin d’optimiser la <b>gestion de la synchronisation</b> des données, chaque notice d'autorité a un graphe bien à elle, appelé « graphe nommé » et numéroté par son identifiant PPN.<br/>
+			Il en va de même pour les ressources bibliographiques Sudoc et leurs liens aux autorités. Chaque notice Sudoc a son graphe dédié. Chaque modification ou création de notice Sudoc est répercutée sans délai dans data.id<span style="color:#da1259;">ref</span>.fr.
+			<p>
+			Pour les autres gisements documentaires, les alignements sont mis à jour à périodicité régulière, le plus souvent chaque semaine, en fonction des nouveaux dépôts effectués dans les gisements sources.
+			Exemple : l'alignement d'un auteur d'une nouvelle publication dans ORBi sera visible dans la semaine suivante.	<br/>
+			</p>
+			<p>
+			<h5>La modélisation des autorités et des alignements aux publications</h5>
+			<p>Pour naviguer et interroger les données, il faut avoir une idée de leur modélisation.<br/>
+				Une <b>autorité</b> est décomposée en notice et en entité :
+						<ol> - un uri &lt;<span style="color:blue;">http://www.idref.fr/PPN</span>&gt; qui correspond à la notice</ol>
+						<ol> - un uri &lt;<span style="color:blue;">http://www.idref.fr/PPN/id</span>&gt; qui correspond à l’entité décrite.</ol>
+
+			Ces deux éléments sont reliés par un lien de type 'foaf:primaryTopic' allant de la notice vers l’entité décrite : <br/>
+						<ol> - &lt;<span style="color:blue;">http://www.idref.fr/PPN</span>&gt; &lt;<span>http://xmlns.com/foaf/0.1/primaryTopic</span>&gt; &lt;<span style="color:blue;">http://www.idref.fr/PPN/id</span>&gt;</ol>
+			</p>
+			<p>
+			<b>Les publications et références bibliographiques pointent vers les autorités</b>. <br/>
+				Cela signifie que les triplets des liens bibliographiques ont pour « sujet » les uri des références documentaires et pour « objet » les uri d'entités IdRef.<br/>
+			Soit le roman « La plaisanterie » de Milan Kundera dans le Sudoc, le triplet correspondant est :
+				<ol> - <<span style="color:blue;">http://www.sudoc.fr/203172744/id</span>&gt;   <<span>http://id.loc.gov/vocabulary/relators/aut.html</span>>   &lt;<span style="color:blue;">http://www.idref.fr/026955059/id</span>&gt;. </ol>
+
+			Soit des publications de "Meguerditchian, Adrien" dans HAL, OpenEdition et Archive ouverte UNIGE, les triplets correspondants sont :
+				<ol> - <<span style="color:blue;">https://hal.archives-ouvertes.fr/hal-01432469#id</span>&gt;   <<span>http://id.loc.gov/vocabulary/relators/aut</span>>   &lt;<span style="color:blue;">http://www.idref.fr/146571541/id</span>&gt;.</ol>
+				<ol> - <<span style="color:blue;">https://archive-ouverte.unige.ch/unige:161221#id</span>&gt;   <<span>http://id.loc.gov/vocabulary/relators/aut</span>>   &lt;<span style="color:blue;">http://www.idref.fr/146571541/id</span>&gt;.</ol>
+				<ol> - <<span style="color:blue;">http://journals.openedition.org/primatologie/1625#id</span>&gt;  marcrel:aut  &lt;<span style="color:blue;">http://www.idref.fr/146571541/id</span>&gt;.</ol>
+
+			Il est ensuite possible d'obtenir plus de propriétés des publications (co-auteurs, titre, date de parution, ...) : pour cela, consultez la documentation.<br/>
+			</p>
+			<p>
+			<h5>Les interfaces</h5>
+			A partir de la barre d’action en haut à droite, 3 modalités d’exploration des données sont proposées, d’une technicité progressive :
+			<ul>
+				<ol>1. <b>Exploration</b> est un encart de recherche en langage naturel et de navigation par rebond de lien en lien</ol>
+				<ol>2. <b>Yasgui</b> est un éditeur de requêtes sparql qui facilite leur rédaction, les mémorise, etc.</ol>
+				<ol>3. <b>Sparql endpoint</b> est l'éditeur sparql brut du triple store</ol>
+			</ul>
+			Maintenant à vous de jouer !
+			</p>
+		</div>
+		<div class="col m3">
+			<br/>
+			<div class="card white">
+				<div class="card-content grey-text text-darken-2">
+					<ul>
+						<li><h6 class="titreEncart">Documentation</h6>
+							<ul class="listeEncart">
+								<li><a href="http://documentation.abes.fr/aideidrefdata/index.html" target="_blank">data.id<span style="color:#da1259;">ref</span>.fr</a></li>
+								<li>voir aussi <a href="http://documentation.abes.fr/aideidrefrdf/index.html" target="_blank">IdRef en RDF</a></li>
+								<li>voir aussi <a href="http://documentation.abes.fr/sudoc/manuels/administration/sudoc_rdf/index.html#SudocRdf_1" target="_blank">Sudoc en RDF</a></li>
+							</ul>
+						</li>
+						<li>
+							<h6 class="titreEncart">Triple Store amis</h6>
+							<!--div class="row" >
+                                <div class="col s6"-->
+							<ul class="listeEncart">
+								<li><a href="https://scienceplus.abes.fr/" target="_blank">Scienceplus</a></li>
+								<li><a href="https://idrefplus.idref.fr/" target="_blank">idrefplus (orcid)</a></li>
+								<li><a href="https://dataforhumanities.abes.fr/sparql" target="_blank">dataforhumanities</a></li>
+								<!--li><a href="https://hub-rnsr.idref.fr/sparql" target="_blank">Structures de l’ESR</a></li-->
+							</ul>
+							<!--/div>
+                            <div class="col s6"-->
+							<ul class="listeEncart">
+								<li><a href="http://data.bnf.fr/sparql" target="_blank">BnF</a></li>
+								<li><a href="https://www.geovistory.org/sparql" target="_blank">Persée</a></li>
+								<li><a href="https://query.wikidata.org/" target="_blank">Wikidata</a></li>
+								<li><a href="https://www.geovistory.org/sparql" target="_blank">Geovistory</a></li>
+								<li><a href="http://sparql.archives-ouvertes.fr/sparql" target="_blank">Hal</a></li>
+								<li><a href="http://www.rechercheisidore.fr/sparql" target="_blank">Isidore</a></li>
+							</ul>
+							<!--/div>
+                        </div!-->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer class="page-footer idref-blue" style="font-size:12px;">
+	<div >
+		<div class="row" >
+			<div class="col m6">
+				<h6 class="white-text">Le triplestore data.id<span style="color:#da1259">ref</span>.fr</h6>
+				<p class="grey-text text-lighten-4">
+					Un triplestore est une base de données qui ne contient que des triplets RDF (Resource Description Framework). RDF est le langage de base du Web sémantique.
+					<br/>
+					Un document structuré en RDF est un ensemble de triplets. Un triplet RDF est formellement l'association d'un sujet, d'un prédicat et d'un objet.
+					Un document RDF ainsi formé correspond à un multigraphe orienté étiqueté.
+					<br/>
+					Enfin, SPARQL est le langage d'interrogation standard le plus répandu pour interroger les graphes RDF.
+				</p>
+			</div>
+			<div class="col m2">
+				<p class="grey-text text-lighten-4">
+				<h6 class="white-text">Assistance</h6>
+				<ul class="grey-text text-lighten-4">
+					<li>
+						<a class="grey-text text-lighten-3" href="https://assistance.stp.abes.fr/servicedesk/customer/portals" target="_blank">Guichet d'assistance</a></li>
+				</ul>
+				</p>
+			</div>
+			<div class="col m2">
+				<p class="grey-text text-lighten-4">
+				<h6 class="white-text">Accéder à</h6>
+				<ul class="grey-text text-lighten-4">
+					<li>
+						<a class="grey-text text-lighten-3" href="https://www.idref.fr" target="_blank">
+							<img src="img/logo-idref-blanc.png" title="idref.fr" alt="idref.fr" style="width:60%;"/>
+						</a>
+					</li>
+				</ul>
+				</p>
+			</div>
+			<div class="col m2">
+				<div class="row" >
+					<div class="col m12">
+						<a href="http://www.abes.fr/" target="_blank">
+							<img src="img/logoABESNEG.png" title="ABES" alt="ABES"/>
+						</a>
+					</div>
+				</div>
+				<div class="row" >
+					<div class="col m2">
+						<a href="http://www.enseignementsup-recherche.gouv.fr/" target="_blank" class="logo-mesri" rel="nofollow">
+							<img src="img/logo-mesri.png" title="Ministère de l'enseignement supérieur et de la recherche" alt="logo Mesri" style="margin-left:10px">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright idref-blue darken-1">
+		<div class="container">
+			<div class="row" >
+				<div class="col m6">
+					© 2018 ABES
+				</div>
+				<div class="col m6">
+					<a class="grey-text text-lighten-3" href="http://documentation.abes.fr/legislation/donnees_personnelles.html" target="_blank">Données personnelles</a> |
+					<a class="grey-text text-lighten-3" href="https://abes.fr/pages-cgu/conditions-generales-utilisation-sites-abes.html" target="_blank">Conditions Générales d'Utilisation</a> |
+					<a class="grey-text text-lighten-3" href="https://abes.fr/pages-mentions-legales/idref.html" target="_blank">Mentions légales</a> |
+					<a class="grey-text text-lighten-3" href="https://abes.fr/pages-accessibilite/idref.html" target="_blank">Accessibilité numérique</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+</body>
+</html>

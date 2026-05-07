@@ -1,0 +1,23 @@
+/* CSS pour affichage sparql endpoint virtuoso dans iFrame*/
+
+#header
+{display:none;
+}
+
+#menu ,#footer{
+display:none;
+}
+span.info, label.ckb {
+display:none;
+}
+#debug, #log_debug_info {
+display:none;
+}
+
+label.n[for="options"] {
+display:none;
+}
+#query{
+	height:200px;
+	width:100%;
+}

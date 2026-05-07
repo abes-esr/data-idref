@@ -1,0 +1,8 @@
+/* CSS pour affichage sparql endpoint virtuoso dans iFrame*/
+
+#HD,#FT,.tab_act,.main_expln,#TAB_PAGE_TXT h2, #TAB_PAGE_URILBL h2, #TAB_PAGE_URI h2
+{display:none;
+}
+#MD{
+	background-color:white;
+}

@@ -1,0 +1,72 @@
+html {
+	color: #333333;
+}
+
+body .fa-inverse {
+	color: black;
+}
+
+nav .nav-wrapper .brand-logo img {
+    height: 60px;
+}
+
+.idref-blue {
+    background-color: #282f51 !important;
+}
+
+.idref-red-text {
+    color: #d60a51 !important;
+}
+
+idref-green-text {
+	color: #4da432 !important;
+}
+
+.idref-blue.darken-1 {
+    background-color: #1A1E33 !important;
+}
+
+/* Pour les champs de formulaires */
+.input-field input[type=text]:focus+label {
+	color: #4da432;
+}
+
+.input-field input[type=text]:focus {
+	border-bottom: 1px solid #4da432;
+	box-shadow: 0 1px 0 0 #4da432;
+}
+
+.input-field input[type=text].valid {
+	border-bottom: 1px solid #4da432;
+	box-shadow: 0 1px 0 0 #4da432;
+}
+
+.input-field .prefix.active {
+	color: #4da432;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+nav ul a:hover {
+    background-color: rgba(0,0,0,0);
+}
+
+.titreEncart {
+	color:darkblue;
+	margin-top:10px;
+}
+
+.listeEncart {
+	margin-left:20px;
+}
+
+/* Editeur Yasgui */
+.rowLabel,.textInputsRow {
+	color:black;
+}
+
+.container{
+	width:100%;
+}

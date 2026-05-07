@@ -1,0 +1,198 @@
+@prefix : <https://bdcmining.ouest-france.fr#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://sipaof.fr/expertes> .
+
+<https://sipaof.fr/expertes> rdf:type owl:Ontology ;
+                              owl:imports <http://data.sparna.fr/ontologies/sparnatural-config-core> ,
+                                          <http://data.sparna.fr/ontologies/sparnatural-config-datasources> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://bdcmining.ouest-france.fr#genre
+:genre rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#StringEqualsProperty> ;
+       rdfs:domain :Personne ;
+       rdfs:range :Gender ;
+       <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://xmlns.com/foaf/0.1/gender>" ;
+       rdfs:label "est du genre"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#hasLabel
+:hasLabel rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+          rdfs:domain :Subject ;
+          rdfs:range :Text ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/2004/02/skos/core#prefLabel>" ;
+          rdfs:label "a pour intitulé"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#hasName
+:hasName rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+         rdfs:domain :Organization ,
+                     :Personne ;
+         rdfs:range :Text ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/2004/02/skos/core#prefLabel>" ;
+         rdfs:label "a pour nom"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#hasQualification
+:hasQualification rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+                  rdfs:domain :Experte ,
+                              :Personne ;
+                  rdfs:range :Text ;
+                  <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://id.loc.gov/vocabulary/relators/aut>/<http://purl.org/dc/terms/subject>/<http://www.w3.org/2004/02/skos/core#prefLabel>" ;
+                  rdfs:label "a pour compétence"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#hasTitle
+:hasTitle rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+          rdfs:domain :Document ;
+          rdfs:range :Text ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://purl.org/dc/terms/bibliographicCitation>" ;
+          rdfs:label "a pour titre"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#hassubject
+:hassubject rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#NonSelectableProperty> ;
+            rdfs:domain :Document ;
+            rdfs:range :Subject ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://purl.org/dc/terms/subject>"@fr ;
+            rdfs:label "a pour sujet"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#isAuthor
+:isAuthor rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+          rdfs:domain :Personne ;
+          rdfs:range :Document ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://id.loc.gov/vocabulary/relators/aut>"@fr ;
+          rdfs:label "est auteur de"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#isLocated
+:isLocated rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SearchProperty> ;
+           rdfs:domain :Experte ;
+           rdfs:range :Text ;
+           <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "^<http://id.loc.gov/vocabulary/relators/aut>/<http://id.loc.gov/vocabulary/relators/dgg>/<http://www.w3.org/2004/02/skos/core#prefLabel>"@fr ;
+           rdfs:label "est localisée à"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#linkedTo
+:linkedTo rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+          rdfs:domain :Document ;
+          rdfs:range :Organization ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://id.loc.gov/vocabulary/relators/dgg>"@fr ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#search_skospreflabel_bifcontains> ;
+          rdfs:label "en lien avec"@fr .
+
+
+###  https://sipaof.fr/expertes#hasCitation
+:hasCitation rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+             rdfs:domain :Thesis ;
+             rdfs:range :Text ;
+             <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://purl.org/dc/terms/bibliographicCitation>" ;
+             rdfs:label "a pour citation bibliographique"@fr .
+
+
+###  https://sipaof.fr/expertes#hasPubType
+:hasPubType rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#AutocompleteProperty> ;
+            <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> ""@fr ;
+            rdfs:label "est de type"@fr .
+
+
+###  https://sipaof.fr/expertes#test
+:test rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf <http://data.sparna.fr/ontologies/sparnatural-config-core#ListProperty> ;
+      rdfs:domain :Document ;
+      rdfs:range :pubType ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>" ;
+      <http://data.sparna.fr/ontologies/sparnatural-config-datasources#datasource> <http://data.sparna.fr/ontologies/sparnatural-config-datasources#query_search_URI_contains> ;
+      rdfs:label "est de type"@fr .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://bdcmining.ouest-france.fr#Document
+:Document rdf:type owl:Class ;
+          rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :hasTitle ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://purl.org/ontology/bibo/Document>;<http://purl.org/dc/terms/bibliographicCitation> ?citation" ;
+          rdfs:label "Publication"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#Experte
+:Experte rdf:type owl:Class ;
+         rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :hasName ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://xmlns.com/foaf/0.1/Person>;<http://xmlns.com/foaf/0.1/gender> \"female\"" ;
+         rdfs:label "Experte"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#Gender
+:Gender rdf:type owl:Class ;
+        rdfs:subClassOf rdfs:Literal ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://xmlns.com/foaf/0.1#gender>" ;
+        rdfs:label "Genre"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#Organization
+:Organization rdf:type owl:Class ;
+              rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :hasName ;
+              <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://xmlns.com/foaf/0.1/Organization>"@fr ;
+              rdfs:label "Organisation"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#Personne
+:Personne rdf:type owl:Class ;
+          rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :hasName ;
+          <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://xmlns.com/foaf/0.1/Person>" ;
+          rdfs:label "Personne"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#Subject
+:Subject rdf:type owl:Class ;
+         rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#defaultLabelProperty> :hasLabel ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/2004/02/skos/core#Concept>" ;
+         rdfs:label "Sujet"@fr .
+
+
+###  https://bdcmining.ouest-france.fr#Text
+:Text rdf:type owl:Class ;
+      rdfs:subClassOf rdfs:Literal ;
+      rdfs:label "Texte"@fr .
+
+
+###  https://sipaof.fr/expertes#Thesis
+:Thesis rdf:type owl:Class ;
+        rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+        <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://purl.org/ontology/bibo/Thesis>"@fr ;
+        rdfs:label "Thèse"@fr .
+
+
+###  https://sipaof.fr/expertes#pubType
+:pubType rdf:type owl:Class ;
+         rdfs:subClassOf <http://data.sparna.fr/ontologies/sparnatural-config-core#SparnaturalClass> ;
+         <http://data.sparna.fr/ontologies/sparnatural-config-core#sparqlString> "<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>" ;
+         rdfs:label "Type de publication"@fr .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

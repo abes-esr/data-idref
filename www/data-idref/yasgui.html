@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Data IdRef - IdRef en métadonnées : YASGUI</title>
+
+		<link rel="shortcut icon" href="img/icon.png" />
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="css/style.css">
+		<link href='//cdn.jsdelivr.net/yasgui/2.5.0/yasgui.min.css' rel='stylesheet' type='text/css'/>
+		<style>
+		  /** uncomment this if you'd like to hide the endpoint selector
+		  
+		  **/
+		  .yasgui .fullscreenToggleBtns {display:none !important;}
+		</style>
+		
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+		<script src="https://use.fontawesome.com/8f945fc6cf.js"></script>
+		<!-- Piwik -->
+		<script type="text/javascript">
+		  var _paq = _paq || [];
+		  // tracker methods like "setCustomDimension" should be called before "trackPageView"
+		  _paq.push(['trackPageView']);
+		  _paq.push(['enableLinkTracking']);
+		  (function() {
+		    var u="//piwik.abes.fr/";
+		    _paq.push(['setTrackerUrl', u+'piwik.php']);
+		    _paq.push(['setSiteId', '20']);
+		    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		  })();
+		  <!-- End Piwik Code -->	
+		  
+		  $(document).ready(function(){
+			$('.sidenav').sidenav();
+		  });
+		</script>			
+	</head>
+	<body class="grey lighten-5">
+		<div class="navbar-fixed">
+			<nav class="white">
+				<div class="nav-wrapper">
+				  <a href="https://data.idref.fr" target="_blank" class="brand-logo"><img src="img/logo-data-idref.png" title="IdRef" alt="IdRef" /></a>
+				  <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+				  <ul class="right hide-on-med-and-down">
+					<li><a href="/index.html" class="black-text">Accueil</a></li>	
+					<li><a href="/exploration.html" class="black-text">Exploration</a></li>					
+					<li class="active"><a href="/yasgui.html" class="black-text">Yasgui</a></li>
+					<li><a href="/sparql" class="black-text">Sparql endpoint</a></li>
+					<li>
+						<a href="http://documentation.abes.fr/aideidrefrdf/index.html" target="_blank" >
+							<img src="img/aide.png" title="Documentation" alt="Documentation" />
+						</a>
+					</li>
+				  </ul>
+				</div>
+			</nav>
+		</div>
+		<ul class="sidenav white" id="mobile-demo">
+			<li><a href="/index.html" class="black-text">Accueil</a></li>	
+			<li><a href="/exploration.html" class="black-text">Exploration</a></li>					
+			<li  class="active"><a href="/yasgui.html" class="black-text">Yasgui</a></li>
+			<li><a href="/sparql" class="black-text">Sparql endpoint</a></li>
+			<li>
+				<a href="http://documentation.abes.fr/aideidrefdata/index.html" target="_blank" >
+					<img src="img/aide.png" title="Documentation" alt="Documentation" />
+				</a>
+			</li>
+		</ul>				
+		
+		<div class="container">			
+			<div class="row">
+				<div class="col s12 m8">															
+					<br/>
+					<p>
+						<h3>Yasgui</h3>
+						Yasgui est une interface conviviale d'aide à la rédaction des requêtes permettant d'interroger les données du Triple Store. 
+						Avec son aide et celle des exemples en partie droite, développez vos bases en requêtage sparql.
+					</p>
+					<div id='yasgui'></div>					
+					<script src='//cdn.jsdelivr.net/yasgui/2.5.0/yasgui.min.js'></script>
+					<script src='/js/yasgui.js'></script>
+				</div>			
+				
+				<div class="col m4">
+					<br/>
+					<div class="card white">
+						<div class="card-content grey-text text-darken-2">
+							<ul>								
+								<li><h6 class="titreEncart">Requêtes exemples</h6> <!--img src="img/LogoIdref.jpg" title="IdRef" alt="IdRef" style="width:50px;height=50px;"/-->
+									<ul class="listeEncart">
+										<li>Les notices d’autorité <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n\n'+
+										'select distinct ?p where {?p a foaf:Person} LIMIT 100'); 
+										return false;">Personne</a></li>
+										<li>Les notices d’autorité <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n\n'+
+										'select distinct * where {?Concept a skos:Concept ; skos:prefLabel ?label } LIMIT 100'); 
+										return false;">Nom commun</a></li>
+										<li>Les notices <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n'+
+										'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n'+
+										'PREFIX bnf-onto: <http://data.bnf.fr/ontology/bnf-onto/> \n\n'+
+										'SELECT DISTINCT ?uri ?concept ?conceptenrelation \n'+
+										'WHERE \n'+
+										'{?uri a skos:Concept ; skos:prefLabel ?concept ; rdfs:seeAlso ?enrelation ; bnf-onto:FRBNF ?frbnf. \n'+
+										'?enrelation skos:prefLabel ?conceptenrelation \n'+
+										'} \n'+
+										'LIMIT 100'); 
+										return false;">Nom commun en relation les unes avec les autres</a></li>										
+										<li> Les notices <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'PREFIX bio: <http://purl.org/vocab/bio/0.1/> \n'+
+										'PREFIX dcterms: <http://purl.org/dc/terms/> \n\n'+
+										'select ?nom ?naissance ?mort ?titre \n'+
+										'where {graph ?g {?personne a foaf:Person ; foaf:name ?nom. \n'+
+										' \n'+
+										'optional {?personne bio:event [a bio:Birth ; bio:date ?naissance]} \n'+
+										'optional {?personne bio:event [a bio:Death ; bio:date ?mort]}. \n'+
+										'optional {?doc ?role ?personne ; dcterms:bibliographicCitation ?titre}} \n'+
+										'} \n'+
+										'limit 1000'); 
+										return false;">de personnes avec leur nom, dates de naissance et de mort</a>
+										</li>										
+										<li>Les notices <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n\n'+
+										'SELECT DISTINCT ?org ?nom WHERE \n'+
+										'{ \n'+
+										' {?org a foaf:Organization ; foaf:name ?nom. \n'+
+										' ?nom bif:contains \'laboratoire\'. \n'+
+										' } \n'+
+										' UNION \n'+
+										' {?org skos:altLabel ?nom. \n'+
+										' ?nom bif:contains \'laboratoire\'.} \n'+
+										'} \n'+
+										'GROUP BY ?org \n'+
+										'LIMIT 5000'); 
+										return false;">qui contiennent le mot “laboratoire” dans leurs variantes d’appellation</a></li>
+										<li>Les notices <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX dcterms: <http://purl.org/dc/terms/> \n'+
+										'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \n\n'+
+										'select distinct ?notice ?date \n'+
+										'where {  ?notice dcterms:modified ?date.   filter (xsd:date(?date) > \'2018-01-01\'^^xsd:date ) } limit 50'); 
+										return false;">modifiées depuis le 1er janvier 2018</a></li>
+										<li>Les alignements <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'PREFIX owl: <http://www.w3.org/2002/07/owl#> \n'+
+										'PREFIX isni: <http://isni.org/ontology#> \n'+
+										'PREFIX bnf-onto: <http://data.bnf.fr/ontology/bnf-onto/> \n\n'+
+										'select ?idref ?nom ?sameAs ?isni ?frbnf \n'+
+										'where {?idref foaf:primaryTopic ?res. ?res foaf:name ?nom.  \n'+
+										'optional {?res owl:sameAs ?sameAs} \n'+
+										'optional {?res isni:identifierValid ?isni} \n'+
+										'optional {?res bnf-onto:FRBNF ?frbnf}} \n'+
+										'LIMIT 100'); 
+										return false;">d’identifiants d’une autorité donnée</a></li>
+										<li>Les notices d’autorité <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX bio: <http://purl.org/vocab/bio/0.1/> \n'+
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n\n'+
+										'select * \n'+
+										'where { ?p bio:event [a bio:Birth ; bio:date ?naissance] ; foaf:name ?nom. FILTER (?naissance=\'1945\') } LIMIT 50'); 
+										return false;">qui ont pour date de naissance 1945</a></li>
+										<li>Les notices d’autorité <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX bio: <http://purl.org/vocab/bio/0.1/> \n'+
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \n\n'+
+										'select ?p ?nom ?naissance \n'+
+										'where {?p foaf:name ?nom ; bio:event [a bio:Birth ; bio:date ?naissance]. FILTER (xsd:integer(?naissance)>1945) } LIMIT 50'); 
+										return false;">qui ont pour date de naissance une valeur postérieure à 1945</a></li>
+										<li>Les références bibliographiques <a href="#" onclick="javascript:tab.yasqe.setValue(										
+										'PREFIX dcterms: <http://purl.org/dc/terms/> \n\n'+
+										'SELECT * \n'+
+										'WHERE {?uri ?relator <http://www.idref.fr/114044023/id> ; dcterms:bibliographicCitation ?titre.}');
+										return false;">liées à une autorité</a></li>
+										<li>Les notices <a href="#" onclick="javascript:tab.yasqe.setValue(	
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'PREFIX dcterms: <http://purl.org/dc/terms/> \n'+
+										'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n\n'+
+										'select ?nom ?role ?titre \n'+
+										'where {?personne a foaf:Person ; foaf:name ?nom. \n'+
+										'optional {?doc ?relator ?personne ; dcterms:bibliographicCitation ?titre. \n'+
+										'?relator skos:prefLabel ?role.} \n'+
+										'} \n'+
+										'limit 10');
+										return false;">de personnes avec leur nom, leurs documents liés et leur rôle</a></li>
+										<li>La recherche d’<a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX dcterms: <http://purl.org/dc/terms/> \n'+
+										'PREFIX marcrel: <http://id.loc.gov/vocabulary/relators/> \n'+
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'select distinct ?nom ?citation #affiche le nom des personnes trouvées et les documents associés \n'+
+										'where { \n'+
+										'#recherche les documents ont pour sujet l\’écoféminisme \n'+
+										'?doc dcterms:subject <http://www.idref.fr/034901523/id>. \n'+
+										'#recherche leurs auteurs \n'+
+										'?doc marcrel:aut ?auteur. \n'+
+										'#recherche le nom de ces auteurs et ces auteurs sont des personnes \n'+
+										'?auteur foaf:name ?nom. \n'+
+										'?auteur a foaf:Person. \n'+
+										'?doc dcterms:bibliographicCitation ?citation. \n'+
+										'} \n'+
+										'ORDER BY ?nom');																			
+										return false;">experts en « écoféminisme »</a></li>	
+										<li>Les termes <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'#affiche les uri et les libellés des concepts trouvés \n'+
+										'SELECT DISTINCT ?uri1 ?label1 ?uri2 ?label2   COUNT (distinct ?doc2) as ?nbdoc2 \n'+
+										'WHERE { \n'+
+										'#recherche les uris des termes spécifiques du concept Préhistoire identifié par son uri IdRef \n'+
+										'<http://www.idref.fr/027243524/id> skos:narrower ?uri1. \n'+
+										'#Et le libellé de ces uri IdRef \n'+
+										'  ?uri1 skos:prefLabel ?label1. \n'+
+										'#et rebelotte au niveau inférieur (optionnal est nécessaire car tous les concepts rameau n\’ont pas de termes spécifiques) \n'+
+										'OPTIONAL { \n'+
+										'	?uri1 skos:narrower ?uri2. \n'+
+										'	?uri2 skos:prefLabel ?label2. \n'+
+										'   ?doc2 dcterms:subject ?uri2. \n'+
+										'  } }  ORDER BY ?label1');																
+										return false;">spécifiques d’un Concept sur deux niveaux de profondeur</a></li>			
+										<li>Les <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+										'PREFIX marcrel: <http://id.loc.gov/vocabulary/relators/> \n'+
+										'PREFIX dcterms: <http://purl.org/dc/terms/> \n'+
+										'select distinct ?personne ?nom ?citation \n'+
+										' where { \n'+
+										'  ?doc ?relation <http://www.idref.fr/157040569/id>. \n'+
+										'  ?doc dcterms:bibliographicCitation ?citation. \n'+
+										'  ?doc marcrel:pra ?personne. \n'+
+										'  ?personne a foaf:Person. \n'+
+										'  ?personne foaf:name ?nom. \n'+
+										'}  \n'+
+										'LIMIT 100');
+										return false;">présidents de jury de thèse de l’Université de Lorraine</a></li>	
+										<li>Les <a href="#" onclick="javascript:tab.yasqe.setValue(
+										'SELECT ?LeviStrauss_coauthor \n'+
+										'(group_concat(DISTINCT ?auteurnom2 ; SEPARATOR = \' || \') AS ?coauthors)  \n'+
+										'WHERE { \n'+
+										'?doc marcrel:aut <http://www.idref.fr/02698797X/id>. \n'+
+										'?doc marcrel:aut ?auteur. \n'+
+										'?doc2 marcrel:aut ?auteur. \n'+
+										'?doc2 marcrel:aut ?auteur2. \n'+
+										'?auteur foaf:name ?LeviStrauss_coauthor. \n'+
+										'?auteur2 foaf:name ?auteurnom2. \n'+
+										'FILTER(?auteur != <http://www.idref.fr/02698797X/id>) \n'+
+										'FILTER(?auteur2 != <http://www.idref.fr/02698797X/id>) \n'+
+										'FILTER(?auteur != ?auteur2)  \n'+
+										'} \n'+
+										'GROUP BY ?auteur ?LeviStrauss_coauthor');
+										return false;">co-auteurs des co-auteurs de Claude Lévi-Strauss</a></li>										
+									</ul>
+								</li>
+								<li><h6 class="titreEncart">D'autres requêtes disponibles</h6>
+									<ul class="listeEncart">
+										<li><a href="https://github.com/abes-esr/idref-queries" target="_blank">Sur le github abes</a></li>
+									</ul>
+								</li>
+								<li><h6 class="titreEncart">Requêtes croisées</h6>
+									<ul class="listeEncart">
+										<li>Liste des documents <a href="#" onclick="javascript:tab.yasqe.setValue(
+											'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n' +
+											'PREFIX dc: <http://purl.org/dc/elements/1.1/> \n' +
+											'PREFIX dcterms: <http://purl.org/dc/terms/> \n' +
+											'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n' +
+											'PREFIX bnf-onto: <http://data.bnf.fr/ontology/bnf-onto/> \n' +
+											'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n' +
+											'\n' +
+											'SELECT DISTINCT ?nom ?titre ?date (STR(?role) AS ?fonction) ?uri \n' +
+											'WHERE { \n' +
+											'  # Sous-requête pour récupérer le nom et le FRBNF \n' +
+											'  { \n' +
+											'    SELECT ?nom ?frbnf \n' +
+											'    WHERE { \n' +
+											'      <http://www.idref.fr/02713329X/id> skos:prefLabel ?nom ; \n' +
+											'                                      bnf-onto:FRBNF ?frbnf. \n' +
+											'    } \n' +
+											'  } \n' +
+											'\n' +
+											'  # Motif ajouté pour les données locales \n' +
+											'  { \n' +
+											'    ?uri ?relator <http://www.idref.fr/02713329X/id> ; \n' +
+											'         dcterms:bibliographicCitation ?titre ; \n' +
+											'         dc:date ?date. \n' +
+											'    ?relator skos:prefLabel ?role. \n' +
+											'    FILTER (langMatches(lang(?role), \'fr\')) \n' +
+											'  } \n' +
+											'  UNION \n' +
+											'  # Requête principale avec SERVICE pour interroger l\'endpoint BnF \n' +
+											'  { \n' +
+											'    SERVICE <http://data.bnf.fr/sparql> { \n' +
+											'      ?noticebnf bnf-onto:FRBNF ?frbnf ; \n' +
+											'                foaf:focus ?ressourcebnf. \n' +
+											'\n' +
+											'      OPTIONAL { \n' +
+											'        ?expression a <http://rdvocab.info/uri/schema/FRBRentitiesRDA/Expression> ; \n' +
+											'                   ?relator ?ressourcebnf. \n' +
+											'        ?manifestation <http://rdvocab.info/RDARelationshipsWEMI/expressionManifested> ?expression ; \n' +
+											'                       dcterms:title ?titre ; \n' +
+											'                       dcterms:date ?date ; \n' +
+											'                       rdfs:seeAlso ?uri. \n' +
+											'\n' +
+											'        # Récupération du rôle \n' +
+											'        ?relator skos:prefLabel ?role. \n' +
+											'        FILTER (LANG(?role) = \'fr\') \n' +
+											'\n' +
+											'        # Filtre sur les types de relations \n' +
+											'        FILTER (STRSTARTS(STR(?relator), \'http://data.bnf.fr/vocabulary/roles/\') || \n' +
+											'                STRSTARTS(STR(?relator), \'http://id.loc.gov/vocabulary/relator\') || \n' +
+											'                STRSTARTS(STR(?relator), \'http://purl.org/dc/terms/contributor\')) \n' +
+											'      } \n' +
+											'    } \n' +
+											'  } \n' +
+											'}');
+											return false;">de l’IdRef « Michel Serres » à la BnF et dans le Sudoc</a></li>
+										<li>Liste des documents <a href="#" onclick="javascript:tab.yasqe.setValue(
+											'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n' +
+											'PREFIX dcterms: <http://purl.org/dc/terms/> \n' +
+											'PREFIX skos: <http://www.w3.org/2004/02/skos/core#> \n' +
+											'PREFIX owl: <http://www.w3.org/2002/07/owl#> \n' +
+											'PREFIX bibo: <http://purl.org/ontology/bibo/> \n' +
+											'PREFIX rdam: <http://rdaregistry.info/Elements/m/> \n' +
+											'PREFIX dc: <http://purl.org/dc/elements/1.1/> \n' +
+											'\n' +
+											'SELECT ?nom ?titre ?date (str(?role) as ?fonction) ?uri \n' +
+											'WHERE { \n' +
+											'    { \n' +
+											'        <http://www.idref.fr/031045375/id> foaf:name ?nom. \n' +
+											'        ?uri ?relator <http://www.idref.fr/031045375/id> ; dcterms:bibliographicCitation ?titre. \n' +
+											'        ?relator skos:prefLabel ?role. \n' +
+											'        BIND (str(?role) as ?fonction) \n' +
+											'        OPTIONAL { ?uri dc:date ?date. }  \n' +
+											'    } \n' +
+											'    UNION \n' +
+											'    { \n' +
+											'        SERVICE <https://data.persee.fr/sparql> \n' +
+											'        { \n' +
+											'            ?uriext owl:sameAs <http://www.idref.fr/031045375/id> ; foaf:name ?nom. \n' +
+											'            ?uri ?marcrel ?uriext; a bibo:Document. \n' +
+											'            ?uri dcterms:title ?titre. \n' +
+											'            ?uri rdam:dateOfPublication ?date. \n' +
+											'        } \n' +
+											'        ?marcrel skos:prefLabel ?role. \n' +
+											'        BIND (str(?role) as ?fonction) \n' +
+											'    } \n' +
+											'} \n' +
+											'LIMIT 25');
+												return false;">de l’IdRef « Ernst Gombrich » dans Persée et le Sudoc</a></li>
+										<li>Quelques propriétés d'<a href="#" onclick="javascript:tab.yasqe.setValue(
+											'PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n'+
+											'PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n'+
+											'PREFIX dc: <http://purl.org/dc/elements/1.1/> \n'+
+											'PREFIX dcterms: <http://purl.org/dc/terms/> \n'+
+											' \n'+
+											'SELECT * \n'+
+											'WHERE  \n'+
+											'{?idref dcterms:identifier ?ppn ; foaf:primaryTopic [foaf:name \'Michel Serres\']. \n'+
+											'SERVICE <http://query.wikidata.org/bigdata/namespace/wdq/sparql> \n'+
+											'	{?wd ?relation ?ppn. \n'+
+											'	OPTIONAL {?wd <http://www.wikidata.org/prop/direct/P69> [rdfs:label ?scolarite]. FILTER (lang(?scolarite)=\'fr\')}. \n'+
+											'	OPTIONAL {?wd <http://www.wikidata.org/prop/direct/P108> [rdfs:label ?enposte]. FILTER (lang(?enposte)=\'fr\')}. \n'+
+											'	OPTIONAL {?wd <http://www.wikidata.org/prop/direct/P463> [rdfs:label ?memberof]. FILTER (lang(?memberof)=\'fr\')}. \n'+
+											'	} \n'+
+											'} \n'+
+											'');
+											return false;">une personne nommée « Michel Serres » dans Wikidata</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>					
+					</div>
+				</div>
+
+			</div>
+		</div>
+<footer class="page-footer idref-blue" style="font-size:12px;">
+      <div >
+        <div class="row" >
+          <div class="col m6">
+            <h6 class="white-text">Le triplestore data.id<span style="color:#da1259">ref</span>.fr</h6>
+            <p class="grey-text text-lighten-4">
+              Un triplestore est une base de données qui ne contient que des triplets RDF (Resource Description Framework). RDF est le langage de base du Web sémantique.
+              <br/>
+              Un document structuré en RDF est un ensemble de triplets. Un triplet RDF est formellement l'association d'un sujet, d'un prédicat et d'un objet.              
+              Un document RDF ainsi formé correspond à un multigraphe orienté étiqueté. 
+              <br/>
+              Enfin, SPARQL est le langage d'interrogation standard le plus répandu pour interroger les graphes RDF.
+            </p>
+          </div>  
+          <div class="col m2">
+            <p class="grey-text text-lighten-4">
+              <h6 class="white-text">Assistance</h6> 
+              <ul class="grey-text text-lighten-4">
+                <li>
+                <a class="grey-text text-lighten-3" href="https://assistance.stp.abes.fr/servicedesk/customer/portals" target="_blank">Guichet d'assistance</a></li>
+              </ul>
+            </p>        
+          </div>  
+          <div class="col m2">
+            <p class="grey-text text-lighten-4">
+              <h6 class="white-text">Accéder à</h6> 
+              <ul class="grey-text text-lighten-4">
+                <li>
+                   <a class="grey-text text-lighten-3" href="https://www.idref.fr" target="_blank">
+                     <img src="img/logo-idref-blanc.png" title="idref.fr" alt="idref.fr" style="width:60%;"/>
+                   </a>
+                 </li>
+              </ul>
+            </p>        
+          </div>            
+          <div class="col m2">
+           <div class="row" >
+            <div class="col m12">
+              <a href="http://www.abes.fr/" target="_blank">
+                <img src="img/logoABESNEG.png" title="ABES" alt="ABES"/>
+              </a>
+            </div>
+            </div>
+            <div class="row" >  
+              <div class="col m2">
+                <a href="http://www.enseignementsup-recherche.gouv.fr/" target="_blank" class="logo-mesri" rel="nofollow">
+                  <img src="img/logo-mesri.png" title="Ministère de l'enseignement supérieur et de la recherche" alt="logo Mesri" style="margin-left:10px">
+                </a>              
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright idref-blue darken-1">
+        <div class="container">
+          <div class="row" >
+			  <div class="col m6">
+				  © 2018 ABES
+			  </div>
+			  <div class="col m6">
+				  <a class="grey-text text-lighten-3" href="http://documentation.abes.fr/legislation/donnees_personnelles.html" target="_blank">Données personnelles</a> |
+				  <a class="grey-text text-lighten-3" href="https://abes.fr/pages-cgu/conditions-generales-utilisation-sites-abes.html" target="_blank">Conditions Générales d'Utilisation</a> |
+				  <a class="grey-text text-lighten-3" href="https://abes.fr/pages-mentions-legales/idref.html" target="_blank">Mentions légales</a> |
+				  <a class="grey-text text-lighten-3" href="https://abes.fr/pages-accessibilite/idref.html" target="_blank">Accessibilité numérique</a>
+			  </div>
+          </div>
+        </div>
+      </div>
+    </footer>   	
+	</body>
+</html>

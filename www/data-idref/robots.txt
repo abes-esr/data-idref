@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /conductor
+Crawl-delay: 10

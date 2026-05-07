@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Data IdRef - IdRef en métadonnées : exploration des données</title>
+
+		<link rel="shortcut icon" href="img/icon.png" />
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" href="css/style.css">
+		
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+		<script src="https://use.fontawesome.com/8f945fc6cf.js"></script>
+		<!-- Piwik -->
+		<script type="text/javascript">
+		  var _paq = _paq || [];
+		  // tracker methods like "setCustomDimension" should be called before "trackPageView"
+		  _paq.push(['trackPageView']);
+		  _paq.push(['enableLinkTracking']);
+		  (function() {
+		    var u="//piwik.abes.fr/";
+		    _paq.push(['setTrackerUrl', u+'piwik.php']);
+		    _paq.push(['setSiteId', '20']);
+		    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+		    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+		  })();
+		  <!-- End Piwik Code -->	
+		  
+		  $(document).ready(function(){
+			$('.sidenav').sidenav();
+		  });
+		</script>					
+	</head>
+	<body class="grey lighten-5">
+		<div class="navbar-fixed">
+			<nav class="white">
+				<div class="nav-wrapper">
+				  <a href="https://data.idref.fr" target="_blank" class="brand-logo"><img src="img/logo-data-idref.png" title="IdRef" alt="IdRef" /></a>
+				  <a href="#" data-target="mobile-demo" class="sidenav-trigger black-text"><i class="material-icons">menu</i></a>
+				  <ul class="right hide-on-med-and-down">
+					<li><a href="/index.html" class="black-text">Accueil</a></li>
+					<li class="active"><a href="/exploration.html" class="black-text">Exploration</a></li>						
+					<li><a href="/yasgui.html" class="black-text">Yasgui</a></li>
+					<li><a href="/sparql" class="black-text">Sparql endpoint</a></li>
+					<li>
+						<a href="http://documentation.abes.fr/aideidrefdata/index.html" target="_blank" >
+							<img src="img/aide.png" title="Documentation" alt="Documentation" />
+						</a>
+					</li>
+				  </ul>
+				</div>
+			</nav>
+		</div>
+		<ul class="sidenav white" id="mobile-demo">
+			<li><a href="/index.html" class="black-text">Accueil</a></li>	
+			<li class="active"><a href="/exploration.html" class="black-text">Exploration</a></li>					
+			<li><a href="/yasgui.html" class="black-text">Yasgui</a></li>
+			<li><a href="/sparql" class="black-text">Sparql endpoint</a></li>
+			<li>
+				<a href="http://documentation.abes.fr/aideidrefrdf/index.html" target="_blank" >
+					<img src="img/aide.png" title="Documentation" alt="Documentation" />
+				</a>
+			</li>
+		</ul>				
+		
+		<div class="container">			
+			<div class="row">
+				<div class="col s12">
+					<script type="text/javascript">
+					function onFrameLoad() {
+					var cssLink = document.createElement("link");
+					cssLink.href = "/css/facettes.css"; 
+					cssLink.rel = "stylesheet"; 
+					cssLink.type = "text/css"; 
+					frames['frame1'].document.body.appendChild(cssLink); 
+					 }</script>	
+					 
+					<br/>
+					<p>
+						<h3>Exploration des données</h3>
+						Pour obtenir des résultats, parcourir les triplets et naviguer de lien en lien, entrez un terme de recherche en langage naturel dans le champ « Search Text » de l’onglet « Text search ».<br/>
+						Dans l’onglet « Entity URI Lookup », entrez à partir d’une URI :
+                        <ul>
+                          <ol><a href="http://www.idref.fr/057086370/id">http://www.idref.fr/057086370/id</a></ol>
+                          <ol><a href="http://www.sudoc.fr/064940969/id">http://www.sudoc.fr/064940969/id</a></ol>
+                          <ol><a href="https://hal.archives-ouvertes.fr/hal-03034749#id">https://hal.archives-ouvertes.fr/hal-03034749#id</a></ol>
+                          <ol><a href="http://journals.openedition.org/emam/4788#id">http://journals.openedition.org/emam/4788#id</a></ol>
+                          <ol><a href="https://serval.unil.ch/notice/serval:BIB_0A9D61D0349A#id">https://serval.unil.ch/notice/serval:BIB_0A9D61D0349A#id</a></ol>
+                        </ul>
+                     <br/>
+						(Pour l’interface Virtuoso d’exploration, c’est <a href="/fct" target="_blank">ici</a>).				
+					</p>
+					<p><iframe name='frame1' id="frame1" src="/fct" width="100%" height="480" frameborder="0" onload="onFrameLoad()"></iframe></p>
+				</div>
+			</div>	
+		</div>
+
+<footer class="page-footer idref-blue" style="font-size:12px;">
+      <div >
+        <div class="row" >
+          <div class="col m6">
+            <h6 class="white-text">Le triplestore data.id<span style="color:#da1259">ref</span>.fr</h6>
+            <p class="grey-text text-lighten-4">
+              Un triplestore est une base de données qui ne contient que des triplets RDF (Resource Description Framework). RDF est le langage de base du Web sémantique.
+              <br/>
+              Un document structuré en RDF est un ensemble de triplets. Un triplet RDF est formellement l'association d'un sujet, d'un prédicat et d'un objet.              
+              Un document RDF ainsi formé correspond à un multigraphe orienté étiqueté. 
+              <br/>
+              Enfin, SPARQL est le langage d'interrogation standard le plus répandu pour interroger les graphes RDF.
+            </p>
+          </div>  
+          <div class="col m2">
+            <p class="grey-text text-lighten-4">
+              <h6 class="white-text">Assistance</h6> 
+              <ul class="grey-text text-lighten-4">
+                <li>
+                <a class="grey-text text-lighten-3" href="https://assistance.stp.abes.fr/servicedesk/customer/portals" target="_blank">Guichet d'assistance</a></li>
+              </ul>
+            </p>        
+          </div>  
+          <div class="col m2">
+            <p class="grey-text text-lighten-4">
+              <h6 class="white-text">Accéder à</h6> 
+              <ul class="grey-text text-lighten-4">
+                <li>
+                   <a class="grey-text text-lighten-3" href="https://www.idref.fr" target="_blank">
+                     <img src="img/logo-idref-blanc.png" title="idref.fr" alt="idref.fr" style="width:60%;"/>
+                   </a>
+                 </li>
+              </ul>
+            </p>        
+          </div>            
+          <div class="col m2">
+           <div class="row" >
+            <div class="col m12">
+              <a href="http://www.abes.fr/" target="_blank">
+                <img src="img/logoABESNEG.png" title="ABES" alt="ABES"/>
+              </a>
+            </div>
+            </div>
+            <div class="row" >  
+              <div class="col m2">
+                <a href="http://www.enseignementsup-recherche.gouv.fr/" target="_blank" class="logo-mesri" rel="nofollow">
+                  <img src="img/logo-mesri.png" title="Ministère de l'enseignement supérieur et de la recherche" alt="logo Mesri" style="margin-left:10px">
+                </a>              
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright idref-blue darken-1">
+        <div class="container">
+          <div class="row" >
+              <div class="col m6">
+                  © 2018 ABES
+              </div>
+              <div class="col m6">
+                  <a class="grey-text text-lighten-3" href="http://documentation.abes.fr/legislation/donnees_personnelles.html" target="_blank">Données personnelles</a> |
+                  <a class="grey-text text-lighten-3" href="https://abes.fr/pages-cgu/conditions-generales-utilisation-sites-abes.html" target="_blank">Conditions Générales d'Utilisation</a> |
+                  <a class="grey-text text-lighten-3" href="https://abes.fr/pages-mentions-legales/idref.html" target="_blank">Mentions légales</a> |
+                  <a class="grey-text text-lighten-3" href="https://abes.fr/pages-accessibilite/idref.html" target="_blank">Accessibilité numérique</a>
+              </div>
+          </div>
+        </div>
+      </div>
+    </footer>    		
+	</body>
+</html>
