@@ -1,0 +1,38 @@
+Options -Indexes +FollowSymLinks
+Require all granted
+
+RewriteEngine On
+RewriteOptions inherit
+
+Header set Access-Control-Allow-Origin *
+
+# accès nécessaire au répertoire abes servi par virtuoso
+RewriteCond %{REQUEST_URI} ^/abes     [OR]
+RewriteCond %{REQUEST_URI} ^/about    [OR]
+RewriteCond %{REQUEST_URI} ^/fct      [OR]
+RewriteCond %{REQUEST_URI} ^/services/rdf/iriautocomplete.get [OR]
+RewriteCond %{REQUEST_URI} ^/sparql
+RewriteRule .* ${VIRTUOSO_URL}%{REQUEST_URI} [L,P]
+
+RewriteCond %{REQUEST_URI} ^/describe
+RewriteRule .* ${VIRTUOSO_URL}%{REQUEST_URI} [NE,L,P]
+
+# page d'accueil par défaut
+RewriteCond %{REQUEST_URI} ^/$      [OR]
+RewriteCond %{REQUEST_URI} ^$
+RewriteRule .* /index.html [L]
+
+# pour éviter l'accès à la partie administrative de virtuoso ( /conductor )
+RewriteCond %{REQUEST_URI} !^/erreur.html$
+RewriteCond %{REQUEST_URI} !^/index.html$
+RewriteCond %{REQUEST_URI} !^/exploration.html$
+RewriteCond %{REQUEST_URI} !^/yasgui.html$
+RewriteCond %{REQUEST_URI} !^/endpoint.html$
+RewriteCond %{REQUEST_URI} !^/all.file.json$
+RewriteCond %{REQUEST_URI} !^/google5d40f499080fb154.html$
+RewriteCond %{REQUEST_URI} !^/robots.txt$
+RewriteCond %{REQUEST_URI} !^/css
+RewriteCond %{REQUEST_URI} !^/img
+RewriteCond %{REQUEST_URI} !^/js
+RewriteCond %{REQUEST_URI} !^/sparnatural_idref
+RewriteRule .* /erreur.html [L]

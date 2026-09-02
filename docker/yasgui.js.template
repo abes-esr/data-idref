@@ -1,0 +1,13 @@
+
+YASGUI.YASQE.Autocompleters.prefixes.fetchFrom="/all.file.json";
+YASGUI.YASQE.defaults.autocompleters = ["prefixes", "properties", "classes", "variables"];
+
+var yasgui = YASGUI(document.getElementById("yasgui"), {
+    yasqe:	{sparql:{endpoint:'${SPARQL_PUBLIC_ENDPOINT}'},
+        autocompleters: ["prefixes", "properties", "classes", "variables"],
+        defaults:{value:"PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n\n select distinct ?p where {?p a foaf:Person} LIMIT 100"}
+    }
+});
+
+var tab = yasgui.selectTab();
+tab.yasqe.setValue("PREFIX foaf: <http://xmlns.com/foaf/0.1/> \n\n select distinct ?p where {?p a foaf:Person} LIMIT 100");
