@@ -41,3 +41,4 @@ jobs:
         with:
           push: ${{ github.event_name != 'pull_request'  && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/tags/')) }}
           tags: ${{ steps.docker_tag_meta.outputs.tags }}
+          labels: ${{ steps.docker_tag_meta.outputs.labels }}
