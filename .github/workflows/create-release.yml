@@ -1,0 +1,96 @@
+name: 'Create release'
+
+on:
+  workflow_dispatch:
+    inputs:
+      bumpType:
+        description: 'Quel type de version ?'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+      dryRun:
+        description: 'Simuler : calculer la version sans créer le tag ni la release'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: create-release
+  cancel-in-progress: false
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: 'Verify release is created only on "main" or "master" git branch'
+        if: github.ref_name != 'main' && github.ref_name != 'master'
+        run: |
+          echo "::error::A release can only be created from 'main' or 'master' (current branch: ${{ github.ref_name }})"
+          exit 1
+
+      - name: 'Checkout source code'
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: '0'
+          # Le PAT est indispensable : un tag poussé avec le GITHUB_TOKEN par défaut ne
+          # déclenche aucun workflow (garde-fou anti-récursion de GitHub). Sans lui, la
+          # release réussirait mais build-test-pubtodockerhub.yml ne partirait pas et
+          # l'image abesesr/idref:X.Y.Z-data-idref ne serait jamais publiée.
+          token: ${{ secrets.TOKEN_GITHUB_FOR_GITHUB_ACTION }}
+
+      - name: 'Calculate the new version'
+        id: calculate-version
+        env:
+          BUMP_TYPE: ${{ inputs.bumpType }}
+        run: |
+          set -euo pipefail
+
+          # Dernier tag semver existant, 0.0.0 si le dépôt n'en a aucun
+          latestTag=$(git tag --list --sort=-v:refname | grep -m 1 -E '^[0-9]+\.[0-9]+\.[0-9]+$' || echo '0.0.0')
+          IFS='.' read -r major minor patch <<< "$latestTag"
+
+          case "$BUMP_TYPE" in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            patch) patch=$((patch + 1)) ;;
+            *) echo "::error::Type de version inconnu : '$BUMP_TYPE' (attendu : major, minor ou patch)"; exit 1 ;;
+          esac
+
+          releaseVersion="$major.$minor.$patch"
+          echo "releaseVersion=$releaseVersion" >> "$GITHUB_OUTPUT"
+          echo "::notice::$latestTag -> $releaseVersion ($BUMP_TYPE)"
+
+      - name: 'Verify version is not already used as a git tag'
+        env:
+          NEW_TAG:  ${{ steps.calculate-version.outputs.releaseVersion }}
+        run: |
+          if git rev-parse -q --verify "refs/tags/$NEW_TAG" > /dev/null; then
+            echo "::error::Tag $NEW_TAG already exists"
+            exit 1
+          fi
+
+      - name: 'Create and push the git tag'
+        if: ${{ !inputs.dryRun }}
+        env:
+          NEW_TAG: ${{ steps.calculate-version.outputs.releaseVersion }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "$NEW_TAG" -m "Version $NEW_TAG"
+          git push origin "$NEW_TAG"
+
+      - name: 'Create the github release'
+        if: ${{ !inputs.dryRun }}
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.calculate-version.outputs.releaseVersion }}
+          generate_release_notes: true
+          token: ${{ secrets.TOKEN_GITHUB_FOR_GITHUB_ACTION }}
